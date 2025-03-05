@@ -6,8 +6,8 @@ import { withMakeswift } from './middlewares/with-makeswift';
 import { withRoutes } from './middlewares/with-routes';
 
 export const middleware = composeMiddlewares(
-  withAuth,
   withMakeswift,
+  withAuth,
   withIntl,
   withChannelId,
   withRoutes,
