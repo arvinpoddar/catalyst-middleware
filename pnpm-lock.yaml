@@ -39,8 +39,8 @@ importers:
         specifier: ^11.2.0
         version: 11.2.0(react@19.0.0)
       '@makeswift/runtime':
-        specifier: 0.0.0-snapshot-20250304215752
-        version: 0.0.0-snapshot-20250304215752(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(next@15.2.0-canary.52(@playwright/test@1.50.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.0.0-snapshot-20250305165149
+        version: 0.0.0-snapshot-20250305165149(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(next@15.2.0-canary.52(@playwright/test@1.50.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@radix-ui/react-accordion':
         specifier: ^1.2.2
         version: 1.2.2(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1421,8 +1421,8 @@ packages:
   '@makeswift/prop-controllers@0.4.1':
     resolution: {integrity: sha512-o9FkM0czODl1aXGxvnVOpx/KMLCJQ2wy5LUnUacPGXxZRW8fbsDaF3Y3dmM6tv2fJgIQbUG+bEpHBFQd1AxZJg==}
 
-  '@makeswift/runtime@0.0.0-snapshot-20250304215752':
-    resolution: {integrity: sha512-QYjt/ki3Z0kgze7Uc2GBekQVzKuP4GtDhvM42g35CAm961qj9y2zDsc6nuCrP1dFsrioByKzJAKUoRFMvG/KZg==}
+  '@makeswift/runtime@0.0.0-snapshot-20250305165149':
+    resolution: {integrity: sha512-ZMW9CMA86b1CjK17QvCCQR9gNcZVLOlpyQ/lvufouDo5oslajvSBQqCmHvE5Uc3L7FDTt9oYPOSrOALIdzMG+Q==}
     peerDependencies:
       '@types/react': ^18.0.0 || ^19.0.0
       '@types/react-dom': ^18.0.0 || ^19.0.0
@@ -2494,6 +2494,11 @@ packages:
 
   acorn@8.14.0:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.14.1:
+    resolution: {integrity: sha512-OvQ/2pUDKmgfCg++xsTX1wGxfTaszcHVcTctW4UJB4hibJx2HXxxO5UmVgyjMa+ZDsiaf5wWLXYpRWMmBI0QHg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -7222,7 +7227,7 @@ snapshots:
       ts-pattern: 5.6.2
       zod: 3.24.1
 
-  '@makeswift/runtime@0.0.0-snapshot-20250304215752(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(next@15.2.0-canary.52(@playwright/test@1.50.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@makeswift/runtime@0.0.0-snapshot-20250305165149(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(next@15.2.0-canary.52(@playwright/test@1.50.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@emotion/cache': 11.14.0
       '@emotion/css': 11.13.5
@@ -8308,9 +8313,9 @@ snapshots:
     dependencies:
       acorn: 8.14.0
 
-  acorn-typescript@1.4.13(acorn@8.14.0):
+  acorn-typescript@1.4.13(acorn@8.14.1):
     dependencies:
-      acorn: 8.14.0
+      acorn: 8.14.1
     optional: true
 
   acorn-walk@8.3.4:
@@ -8318,6 +8323,9 @@ snapshots:
       acorn: 8.14.0
 
   acorn@8.14.0: {}
+
+  acorn@8.14.1:
+    optional: true
 
   ajv-formats@3.0.1(ajv@8.17.1):
     optionalDependencies:
@@ -11748,8 +11756,8 @@ snapshots:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
       '@types/estree': 1.0.6
-      acorn: 8.14.0
-      acorn-typescript: 1.4.13(acorn@8.14.0)
+      acorn: 8.14.1
+      acorn-typescript: 1.4.13(acorn@8.14.1)
       aria-query: 5.3.2
       axobject-query: 4.1.0
       esm-env: 1.2.2
