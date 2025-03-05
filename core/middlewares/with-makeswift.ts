@@ -46,6 +46,11 @@ export const withMakeswift: MiddlewareFactory = (middleware) => {
       // Remove rewrite headers from the proxied response to allow this response
       // to go through middleware again.
       proxiedResponse.headers.delete('x-middleware-rewrite');
+      proxiedResponse.headers.delete('x-matched-path');
+      proxiedResponse.headers.delete('x-nextjs-prerender');
+      proxiedResponse.headers.delete('x-vercel-cache');
+      proxiedResponse.headers.delete('x-robots-tag');
+      proxiedResponse.headers.delete('x-vercel-id');
 
       console.warn('received proxy draft response', {
         headers: new Map(proxiedResponse.headers),
