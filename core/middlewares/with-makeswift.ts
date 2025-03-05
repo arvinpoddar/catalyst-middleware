@@ -17,11 +17,9 @@ export async function fetchDraftProxyResponse(draftRequest: NextRequest): Promis
   // on Vercel - it results in a `TypeError: Invalid URL` error. Constructing
   // the URL works.
 
-  const headers = new Headers(
-    Object.fromEntries(
-      Array.from(draftRequest.headers.entries()).filter(([key, val]) => !key.includes('vercel')),
-    ),
-  );
+  const headers = new Headers({
+    cookie: draftRequest.headers.get('cookie') ?? '',
+  });
 
   console.warn('proxying with headers', { headers });
 
@@ -33,6 +31,10 @@ export async function fetchDraftProxyResponse(draftRequest: NextRequest): Promis
   const response = new NextResponse(proxyResponse.body, {
     headers: proxyResponse.headers,
     status: proxyResponse.status,
+  });
+
+  console.warn({
+    responseStatus: response.status,
   });
 
   // `fetch` automatically decompresses the response, but the response headers

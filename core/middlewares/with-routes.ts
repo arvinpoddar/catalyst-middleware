@@ -368,7 +368,12 @@ export const withRoutes: MiddlewareFactory = () => {
     rewriteUrl.search = request.nextUrl.search;
 
     console.warn('rewrite URL', rewriteUrl.href);
+    console.warn('request headers', {
+      headers: new Map(request.headers),
+    });
 
-    return NextResponse.rewrite(rewriteUrl);
+    return NextResponse.rewrite(rewriteUrl, {
+      headers: request.headers,
+    });
   };
 };
