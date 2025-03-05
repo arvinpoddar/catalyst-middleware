@@ -369,6 +369,6 @@ export const withRoutes: MiddlewareFactory = () => {
 
     console.warn('rewrite URL', rewriteUrl.href);
 
-    return NextResponse.redirect(rewriteUrl);
+    return NextResponse.rewrite(rewriteUrl);
   };
 };

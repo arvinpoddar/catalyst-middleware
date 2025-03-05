@@ -5,18 +5,17 @@ import { withIntl } from './middlewares/with-intl';
 import { withMakeswift } from './middlewares/with-makeswift';
 import { withRoutes } from './middlewares/with-routes';
 
-const withLogging: MiddlewareFactory = (middleware) => {
-  return (req, event) => {
-    console.warn('INBOUND REQUEST', {
-      path: req.nextUrl.href,
-      headers: new Map(req.headers),
-    });
-    return middleware(req, event);
-  };
-};
+// const withLogging: MiddlewareFactory = (middleware) => {
+//   return (req, event) => {
+//     console.warn('INBOUND REQUEST', {
+//       path: req.nextUrl.href,
+//       headers: new Map(req.headers),
+//     });
+//     return middleware(req, event);
+//   };
+// };
 
 export const middleware = composeMiddlewares(
-  withLogging,
   withMakeswift,
   // withAuth,
   withIntl,

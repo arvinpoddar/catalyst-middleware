@@ -8,11 +8,6 @@ const intlMiddleware = createMiddleware(routing);
 
 export const withIntl: MiddlewareFactory = (next) => {
   return async (request, event) => {
-    console.warn('ENTERING INTL MIDDLEWARE', {
-      headers: new Map(request.headers),
-      path: request.nextUrl.href,
-    });
-
     const intlResponse = intlMiddleware(request);
 
     // If intlMiddleware redirects, or returns a non-200 return it immediately
