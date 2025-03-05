@@ -7,10 +7,47 @@ import { parse as parseSetCookie } from 'set-cookie-parser';
 
 import { MiddlewareFactory } from './compose-middlewares';
 import { strict } from 'assert';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 const localeCookieName = ({ localeCookie }: { localeCookie?: boolean | { name?: string } }) =>
   (typeof localeCookie === 'object' ? localeCookie.name : undefined) ?? 'NEXT_LOCALE';
+
+export async function fetchDraftProxyResponse(draftRequest: NextRequest): Promise<NextResponse> {
+  // Passing `draftRequest.nextUrl` to fetch directly won't work when deployed
+  // on Vercel - it results in a `TypeError: Invalid URL` error. Constructing
+  // the URL works.
+
+  const headers = new Headers(
+    Object.fromEntries(
+      Array.from(draftRequest.headers.entries()).filter(([key, val]) => !key.includes('vercel')),
+    ),
+  );
+
+  console.warn('proxying with headers', { headers });
+
+  const proxyResponse = await fetch(
+    'https://catalyst-middleware-core-git-arvin-7c9381-arvinpoddars-projects.vercel.app/page-2',
+    { headers },
+  );
+
+  const response = new NextResponse(proxyResponse.body, {
+    headers: proxyResponse.headers,
+    status: proxyResponse.status,
+  });
+
+  // `fetch` automatically decompresses the response, but the response headers
+  // will keep the `content-encoding` and `content-length` headers. This will
+  // cause decoding issues if the client attempts to decompress the response
+  // again. To prevent  this, we remove these headers.
+  //
+  // See https://github.com/nodejs/undici/issues/2514.
+  // if (response.headers.has('content-encoding')) {
+  //   response.headers.delete('content-encoding');
+  //   response.headers.delete('content-length');
+  // }
+
+  return response;
+}
 
 export const withMakeswift: MiddlewareFactory = (middleware) => {
   return async (request, event) => {
@@ -41,7 +78,7 @@ export const withMakeswift: MiddlewareFactory = (middleware) => {
         draftRequest.cookies.delete(localeCookieName(routing));
       }
 
-      const proxiedResponse = await unstable_fetchMakeswiftDraftProxyResponse(draftRequest);
+      const proxiedResponse = await fetchDraftProxyResponse(draftRequest);
 
       // Remove rewrite headers from the proxied response to allow this response
       // to go through middleware again.
