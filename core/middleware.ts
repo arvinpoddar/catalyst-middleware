@@ -1,13 +1,24 @@
-import { composeMiddlewares } from './middlewares/compose-middlewares';
+import { composeMiddlewares, MiddlewareFactory } from './middlewares/compose-middlewares';
 import { withAuth } from './middlewares/with-auth';
 import { withChannelId } from './middlewares/with-channel-id';
 import { withIntl } from './middlewares/with-intl';
 import { withMakeswift } from './middlewares/with-makeswift';
 import { withRoutes } from './middlewares/with-routes';
 
+const withLogging: MiddlewareFactory = (middleware) => {
+  return (req, event) => {
+    console.warn('INBOUND REQUEST', {
+      path: req.nextUrl.href,
+      headers: new Map(req.headers),
+    });
+    return middleware(req, event);
+  };
+};
+
 export const middleware = composeMiddlewares(
+  withLogging,
   withMakeswift,
-  withAuth,
+  // withAuth,
   withIntl,
   withChannelId,
   withRoutes,
