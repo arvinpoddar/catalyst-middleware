@@ -262,10 +262,10 @@ const getRouteInfo = async (request: NextRequest, event: NextFetchEvent) => {
 
 export const withRoutes: MiddlewareFactory = () => {
   return async (request, event) => {
-    console.warn('ENTERING ROUTES MIDDLEWARE', {
-      headers: new Map(request.headers),
-      path: request.nextUrl.href,
-    });
+    // console.warn('ENTERING ROUTES MIDDLEWARE', {
+    //   headers: new Map(request.headers),
+    //   path: request.nextUrl.href,
+    // });
 
     const locale = request.headers.get('x-bc-locale') ?? '';
 
@@ -367,7 +367,7 @@ export const withRoutes: MiddlewareFactory = () => {
 
     rewriteUrl.search = request.nextUrl.search;
 
-    console.warn('rewrite URL', rewriteUrl.href);
+    // console.warn('rewrite URL', rewriteUrl.href);
 
     return NextResponse.rewrite(rewriteUrl);
   };
